@@ -6,7 +6,8 @@ d3.csv("planets.csv",function(d){
         radius_km : +d.diameter/2/1000000,
         sun_dist_km : +d.distance_from_sun*10e6/1000000,
         planet : d.planet,
-        orbital_period_days : +d.orbital_period
+        orbital_period_days : +d.orbital_period,
+        rotation_period_days : +d.rotation_period /24
     }
 }).then(donnees => {
     // console.log(donnees)
@@ -37,11 +38,13 @@ d3.csv("planets.csv",function(d){
         let planet = document.createElement("a-sphere")
         let center = document.createElement("a-entity")
         center.setAttribute("position", "0 0 0")
-        center.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].orbital_period_days*10} ; easing: linear`)
+        center.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].orbital_period_days*100} ; easing: linear`)
         planet.setAttribute("radius", +donnees[i].radius_km*50)
         planet.setAttribute("position",`${SUN_RADIUS_KM+ +donnees[i].sun_dist_km/1000} 0 -10`)
         planet.setAttribute("id", donnees[i].planet)
         planet.setAttribute("src", PLANET_TEXTURES[i])
+        planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*100} ; easing: linear`)
+
         //planet.setAttribute("animation", `attribute: rotation; to: 0 360 0; repeat: indefinite; dur: ${donnees[i].orbital_period_days/}; easing:linear`)
         scene.appendChild(center)
         center.appendChild(planet)
