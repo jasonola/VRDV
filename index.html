@@ -13,8 +13,14 @@
     <a-scene>
        <a-assets>
            <img id="stars" src="assets/stars.jpg" alt="stars">
+           <img id="cockpit" src="assets/cockpit.png" alt="cockpit">
        </a-assets>
        <a-sky src="#stars" radius="1000"></a-sky>
+        <a-camera position="0 0 50">
+            <a-image src="#cockpit" position="0 0 -0.25"></a-image>
+
+        </a-camera>
+        
     </a-scene>
     
 </body>

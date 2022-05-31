@@ -20,7 +20,8 @@ d3.csv("planets.csv",function(d){
     let scene = document.querySelector("a-scene")
     // Création du soleil et de la caméra
     let sun = document.createElement("a-sphere")
-    let camera = document.createElement("a-camera")
+    let camera = document.querySelector("a-camera")
+    
     
     // Définir les caracteristiques du soleil et l'ajouter à la scène
     sun.setAttribute("radius",SUN_RADIUS_KM*10)
@@ -29,28 +30,31 @@ d3.csv("planets.csv",function(d){
     sun.setAttribute("src",ASSETS+"sun.jpeg")
     sun.setAttribute("animation", "property: rotation; to: 0 360 0; loop: true; dur: 100000; easing: linear")
     scene.appendChild(sun)
-
-    // Positionner la caméra et l'ajouter à la scène
-    camera.setAttribute("position", "0 0 50")
-    camera.setAttribute("active","true")
-    scene.appendChild(camera)
+   
 
     // Boucle de création des planètes, chaque planète est positionnée par rapport à un centre qu'il faut à chaque fois définir sinon ça marche pas
     for (let i = 0; i < donnees.length; i++) {
         let planet = document.createElement("a-sphere")
         let center = document.createElement("a-entity")
+        let text = document.createElement("a-text")
+        
         center.setAttribute("position", "0 0 0")
         // C'est sur centre qu'on définit la vitesse d'orbite
-        center.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].orbital_period_days*100} ; easing: linear`)
+        center.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].orbital_period_days*1000} ; easing: linear`)
         planet.setAttribute("radius", +donnees[i].radius_km*50)
-        planet.setAttribute("position",`${SUN_RADIUS_KM*10+ +donnees[i].sun_dist_km/1000} 0 -10`)
+        planet.setAttribute("position",`${SUN_RADIUS_KM*10+ +donnees[i].sun_dist_km/100} 0 -10`)
         planet.setAttribute("id", donnees[i].planet)
         // Apposer les textures correspondantes
         planet.setAttribute("src", ASSETS + PLANET_TEXTURES[i])
         // C'est sur planet qu'on définit la vitesse de rotation
-        planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*100} ; easing: linear`)
+        planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*1000} ; easing: linear`)
+        text.setAttribute("value", donnees[i].planet)
+        text.setAttribute("position", `0 ${donnees[i].radius_km*50+1} 0`)
+        text.setAttribute("align", "center")
+        text.setAttribute("scale", "2 2 1")
         scene.appendChild(center)
         center.appendChild(planet)
+        planet.appendChild(text)
     }
    
 })
