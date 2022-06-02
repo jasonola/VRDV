@@ -3,6 +3,7 @@ SUN_RADIUS_KM = 1392000/2/1000000
 ASSETS = "assets/"
 PLANET_TEXTURES = ["mercury.jpeg","venus.jpeg", "earth.webp","mars.jpeg","jupiter.jpeg", "saturn.jpeg", "uranus.jpeg", "neptune.jpeg", "pluto.jpeg"]
 
+
 // Charger les données (https://github.com/devstronomy/nasa-data-scraper/blob/master/data/csv/planets.csv)
 d3.csv("planets.csv",function(d){
     return {
@@ -15,6 +16,19 @@ d3.csv("planets.csv",function(d){
     }
     // Promesse pour d'abord charger et ensuite exploiter les données
 }).then(donnees => {
+    
+    AFRAME.registerComponent('info', {
+    
+        init: function () {
+        let el = this.el;
+        let number = el.getAttribute('number');
+        el.addEventListener('mouseenter', function () {
+            selectNum = number;
+    
+            console.log(donnees[number])
+            });
+        }
+    });
     
     // Selection de la scène pour ensuite y ajouter les differents éléments
     let scene = document.querySelector("a-scene")
@@ -34,7 +48,6 @@ d3.csv("planets.csv",function(d){
     for (let i = 0; i < donnees.length; i++) {
         let planet = document.createElement("a-sphere")
         let center = document.createElement("a-entity")
-        let text = document.createElement("a-text")
         
         center.setAttribute("position", "0 0 0")
         // C'est sur centre qu'on définit la vitesse d'orbite
@@ -43,24 +56,23 @@ d3.csv("planets.csv",function(d){
         planet.setAttribute("position",`${SUN_RADIUS_KM*10+ +donnees[i].sun_dist_km/100} 0 -10`)
         planet.setAttribute("id", donnees[i].planet)
         planet.setAttribute("number", i)
+        planet.setAttribute("info","")
 
         // Apposer les textures correspondantes
         planet.setAttribute("src", ASSETS + PLANET_TEXTURES[i])
         // C'est sur planet qu'on définit la vitesse de rotation
         planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*1000} ; easing: linear`)
-        text.setAttribute("value", donnees[i].planet)
-        text.setAttribute("position", `0 ${donnees[i].radius_km*50+1} 0`)
-        text.setAttribute("align", "center")
-        text.setAttribute("scale", "2 2 1")
+       
         scene.appendChild(center)
         center.appendChild(planet)
-        planet.appendChild(text)
         console.log(planet)
     }
 
-    let infoWrapper = document.getElementById("planet_info")
-    let title = document.createElement("h3")
-    console.log(donnees[0])
+    
+
+    // let infoWrapper = document.getElementById("planet_info")
+    // let title = document.createElement("h3")
+    // console.log(donnees[0])
 
 
     // Ajouter tableau planete sur le tableau de bord du cockpit
