@@ -12,13 +12,12 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.min.js" integrity="sha512-hnFpvCiJ8Fr1lYLqcw6wLgFUOEZ89kWCkO+cEekwcWPIPKyknKV1eZmSSG3UxXfsSuf+z/SgmiYB1zFOg3l2UQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="index.js"></script>
-    <a-scene>
+    <a-scene sound="src: url(assets/space.mp3); autoplay: true; loop: true; positional: false; volume: 0.3">
         <a-assets>
             <img id="stars" src="assets/stars.jpg" alt="stars">
             <img id="cockpit" src="assets/cockpit.png" alt="cockpit">
-            <audio id="space" src="assets/space.mp3"></audio>
         </a-assets>
-        <a-sky src="#stars" radius="1000" sound="src: #space"></a-sky>
+        <a-sky src="#stars" radius="1000"></a-sky>
         <a-camera position="0 0 50">
             <a-entity id='curseur' cursor='fuse : true; fuseTimeout : 100' position="0 0 -0.5" geometry="primitive : sphere; radius : 0.003" material="color : white; shader : flat; opacity : 0.8" animation="property:scale; to:2 2 2; dur:1000; startEvents: mouseenter;">
             </a-entity>
