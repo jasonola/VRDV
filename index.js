@@ -20,12 +20,22 @@ d3.csv("planets.csv",function(d){
     AFRAME.registerComponent('info', {
     
         init: function () {
+        let data = this.data;
         let el = this.el;
         let number = el.getAttribute('number');
         el.addEventListener('mouseenter', function () {
             selectNum = number;
-    
-            console.log(donnees[number])
+            // let infoWrapper = document.getElementById("planet_info")
+            // let title = document.createElement("p")
+            // title.innerHTML = "test"//donnees[number]
+            // infoWrapper.appendChild(title)
+            if (selectNum != 10) {
+                console.log(donnees[selectNum].planet)
+                console.log(donnees[selectNum].radius_km)
+            }else{
+                console.log(sun.id)
+            }
+            
             });
         }
     });
@@ -39,8 +49,11 @@ d3.csv("planets.csv",function(d){
     sun.setAttribute("radius",SUN_RADIUS_KM*10)
     sun.setAttribute("position","0 0 0")
     sun.setAttribute("id", "Sun")
+    sun.setAttribute("number", 10)
     sun.setAttribute("src",ASSETS+"sun.jpeg")
     sun.setAttribute("animation", "property: rotation; to: 0 360 0; loop: true; dur: 100000; easing: linear")
+    sun.setAttribute("info", "")
+
     scene.appendChild(sun)
    
 
