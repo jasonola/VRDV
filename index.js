@@ -3,7 +3,23 @@ SUN_RADIUS_KM = 1392000/2/1000000
 ASSETS = "assets/"
 PLANET_TEXTURES = ["mercury.jpeg","venus.jpeg", "earth.webp","mars.jpeg","jupiter.jpeg", "saturn.jpeg", "uranus.jpeg", "neptune.jpeg", "pluto.jpeg"]
 
+let audio = new Audio("assets/engine.wav")
 
+document.addEventListener('keydown', (event)=> {    
+    if(event.code == "ArrowUp" || event.code == "ArrowDown" ||event.code == "ArrowRight" ||event.code == "ArrowLeft"||
+    event.code == "KeyA" ||event.code == "KeyS" ||event.code == "KeyD" ||event.code == "KeyW"){
+        audio.play()
+        
+    }
+});
+
+document.addEventListener('keyup', (event)=> {    
+    if(event.code == "ArrowUp" || event.code == "ArrowDown" ||event.code == "ArrowRight" ||event.code == "ArrowLeft" ||
+    event.code == "KeyA" ||event.code == "KeyS" ||event.code == "KeyD" ||event.code == "KeyW"){
+        audio.pause()
+        
+    }
+});
 // Charger les données (https://github.com/devstronomy/nasa-data-scraper/blob/master/data/csv/planets.csv)
 d3.csv("planets.csv",function(d){
     return {
