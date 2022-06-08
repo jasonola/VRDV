@@ -93,7 +93,7 @@ d3.csv("planets.csv",function(d){
         planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*1000} ; easing: linear`)
         
         if(i == 2){
-            planet.setAttribute("sound", "src: #earthsound; autoplay: true")
+            planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 4")
         }
 
         scene.appendChild(center)
