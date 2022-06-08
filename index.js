@@ -91,7 +91,11 @@ d3.csv("planets.csv",function(d){
         planet.setAttribute("src", ASSETS + PLANET_TEXTURES[i])
         // C'est sur planet qu'on définit la vitesse de rotation
         planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*1000} ; easing: linear`)
-       
+        
+        if(i == 2){
+            planet.setAttribute("sound", "src: #earthsound; autoplay: true")
+        }
+
         scene.appendChild(center)
         center.appendChild(planet)
         console.log(planet)
