@@ -94,6 +94,8 @@ d3.csv("planets.csv",function(d){
         
         if(i == 2){
             planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 4")
+        }else if(i == 8){
+            planet.setAttribute("sound", "src: #plutosound; autoplay: true; rolloffFactor: 4")
         }
 
         scene.appendChild(center)
