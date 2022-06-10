@@ -3,6 +3,7 @@ SUN_RADIUS_KM = 1392000/2/1000000
 ASSETS = "assets/"
 PLANET_TEXTURES = ["mercury.jpeg","venus.jpeg", "earth.webp","mars.jpeg","jupiter.jpeg", "saturn.jpeg", "uranus.jpeg", "neptune.jpeg", "pluto.jpeg"]
 
+// Sons de moteur sur mouvement
 let audio = new Audio("assets/engine.wav")
 
 document.addEventListener('keydown', (event)=> {    
@@ -32,7 +33,7 @@ d3.csv("planets.csv",function(d){
     }
     // Promesse pour d'abord charger et ensuite exploiter les données
 }).then(donnees => {
-    
+    // composant pour extraire les donnees des planetes par curseur et les afficher (pour l'instant) dans la console
     AFRAME.registerComponent('info', {
     
         init: function () {
@@ -92,6 +93,7 @@ d3.csv("planets.csv",function(d){
         // C'est sur planet qu'on définit la vitesse de rotation
         planet.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].rotation_period_days*1000} ; easing: linear`)
         
+        // Ajouter du son sur Terre et Pluton 
         if(i == 2){
             planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 4")
         }else if(i == 8){
@@ -102,23 +104,5 @@ d3.csv("planets.csv",function(d){
         center.appendChild(planet)
         console.log(planet)
     }
-
-    
-
-    // let infoWrapper = document.getElementById("planet_info")
-    // let title = document.createElement("h3")
-    // console.log(donnees[0])
-
-
-    // Ajouter tableau planete sur le tableau de bord du cockpit
-    // let tableWrapper = document.getElementById("planet_info")
-    // let table = document.createElement('table');
-    // let thead = document.createElement('thead');
-    // let tbody = document.createElement('tbody');
-
-    // table.appendChild(thead);
-    // table.appendChild(tbody);
-    // tableWrapper.appendChild(table)
-    // console.log(donnees)
     
 })
