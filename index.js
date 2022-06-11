@@ -100,6 +100,18 @@ d3.csv("planets.csv",function(d){
             planet.setAttribute("sound", "src: #plutosound; autoplay: true; rolloffFactor: 4")
         }
 
+        if(i == 5){
+            rings = document.createElement("a-torus")
+            rings.setAttribute("radius","6")
+            rings.setAttribute("radiusTubular","0.3")
+            rings.setAttribute("rotation", "90 0 0")
+            rings.setAttribute("scale", "1 1 0.1")
+            rings.setAttribute("color", "#A27C5B")
+            planet.setAttribute("sound", "src: #saturnsound; autoplay: true; rolloffFactor: 4")
+
+            planet.appendChild(rings)
+        }
+
         scene.appendChild(center)
         center.appendChild(planet)
         console.log(planet)
