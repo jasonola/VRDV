@@ -95,9 +95,9 @@ d3.csv("planets.csv",function(d){
         
         // Ajouter du son sur Terre et Pluton 
         if(i == 2){
-            planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 4")
+            planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 1")
         }else if(i == 8){
-            planet.setAttribute("sound", "src: #plutosound; autoplay: true; rolloffFactor: 4")
+            planet.setAttribute("sound", "src: #plutosound; autoplay: true; rolloffFactor: 8; refDistance: 10")
         }
 
         if(i == 5){
@@ -107,7 +107,7 @@ d3.csv("planets.csv",function(d){
             rings.setAttribute("rotation", "90 0 0")
             rings.setAttribute("scale", "1 1 0.1")
             rings.setAttribute("color", "#A27C5B")
-            planet.setAttribute("sound", "src: #saturnsound; autoplay: true; rolloffFactor: 4")
+            planet.setAttribute("sound", "src: #saturnsound; autoplay: true; rolloffFactor: 4; refDistance: 5")
 
             planet.appendChild(rings)
         }
