@@ -24,7 +24,8 @@ document.addEventListener('keyup', (event)=> {
 // Charger les données (https://github.com/devstronomy/nasa-data-scraper/blob/master/data/csv/planets.csv)
 d3.csv("planets.csv",function(d){
     return {
-        // Selectionner et modifier les données qu'on veut, en restant cohérent avec les unités
+        // Selectionner et modifier les données qu'on veut, en restant cohérent avec les unités 
+        //(chiffres réels, ne pas modifier ici)
         radius_km : +d.diameter/2/1000000,
         sun_dist_km : +d.distance_from_sun*10e6/1000000,
         planet : d.planet,
@@ -42,10 +43,14 @@ d3.csv("planets.csv",function(d){
         let number = el.getAttribute('number');
         el.addEventListener('mouseenter', function () {
             selectNum = number;
+
+            // le code commenté si dessous ne fonctionne pas comme je veux, il y a un rectangle noir qui s accumule
+
             // let infoWrapper = document.getElementById("planet_info")
             // let title = document.createElement("p")
             // title.innerHTML = "test"//donnees[number]
             // infoWrapper.appendChild(title)
+
             if (selectNum != 10) {
                 console.log(donnees[selectNum].planet)
                 console.log(donnees[selectNum].radius_km)
@@ -82,8 +87,8 @@ d3.csv("planets.csv",function(d){
         center.setAttribute("position", "0 0 0")
         // C'est sur centre qu'on définit la vitesse d'orbite
         center.setAttribute("animation", `property: rotation; to: 0 360 0; loop: true; dur: ${donnees[i].orbital_period_days*1000} ; easing: linear`)
-        planet.setAttribute("radius", +donnees[i].radius_km*50)
-        planet.setAttribute("position",`${SUN_RADIUS_KM*10+ +donnees[i].sun_dist_km/100} 0 -10`)
+        planet.setAttribute("radius", +donnees[i].radius_km*10)
+        planet.setAttribute("position",`${SUN_RADIUS_KM*10+ +donnees[i].sun_dist_km/50} 0 -10`)
         planet.setAttribute("id", donnees[i].planet)
         planet.setAttribute("number", i)
         planet.setAttribute("info","")
@@ -95,19 +100,20 @@ d3.csv("planets.csv",function(d){
         
         // Ajouter du son sur Terre et Pluton 
         if(i == 2){
-            planet.setAttribute("sound", "src: #earthsound; autoplay: true; rolloffFactor: 1")
+            planet.setAttribute("sound", "src: #earthsound; autoplay: true; volume: 1")
         }else if(i == 8){
-            planet.setAttribute("sound", "src: #plutosound; autoplay: true; rolloffFactor: 8; refDistance: 10")
+            planet.setAttribute("sound", "src: #plutosound; autoplay: true; refDistance: 7; volume: 1")
         }
 
+        // ajouter des anneaux à Saturne 
         if(i == 5){
             rings = document.createElement("a-torus")
-            rings.setAttribute("radius","6")
+            rings.setAttribute("radius","1")
             rings.setAttribute("radiusTubular","0.3")
             rings.setAttribute("rotation", "90 0 0")
-            rings.setAttribute("scale", "1 1 0.1")
+            rings.setAttribute("scale", "1 1 0.01")
             rings.setAttribute("color", "#A27C5B")
-            planet.setAttribute("sound", "src: #saturnsound; autoplay: true; rolloffFactor: 4; refDistance: 5")
+            planet.setAttribute("sound", "src: #saturnsound; autoplay: true; refDistance: 5")
 
             planet.appendChild(rings)
         }

@@ -25,12 +25,13 @@
 
 
         </a-assets>
-        <a-sky src="#stars" radius="1000"></a-sky>
+        <a-sky src="#stars" radius="2000"></a-sky>
         <a-camera position="0 0 50">
             <a-entity id='curseur' cursor='fuse : true; fuseTimeout : 100' position="0 0 -0.5" geometry="primitive : sphere; radius : 0.003" material="color : white; shader : flat; opacity : 0.8" animation="property:scale; to:2 2 2; dur:1000; startEvents: mouseenter;">
             </a-entity>
             <a-image src="#cockpit" position="0 0 -0.25"></a-image>
-            <a-entity id="planet_info" position="0 0 -0.24" htmlembed>   
+            <a-entity id="planet_info" position="0 0 -0.24" htmlembed>  
+                <!-- <p>test</p>  -->
             </a-entity>
             
         </a-camera>
