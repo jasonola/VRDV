@@ -9,4 +9,4 @@ Challenge - Find Pluto (Hint : follow Céline)
 
 To run the project, open the folder in VS Code and go live with Live Server extension. 
 
-To view the project, click [here](solar-system-psi-mauve.vercel.app)
+To view the project, click [here](https://solar-system-psi-mauve.vercel.app/)
