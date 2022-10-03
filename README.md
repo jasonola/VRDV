@@ -8,3 +8,5 @@ Feel free to tweek the numbers as you please in the code to reduce distance or a
 Challenge - Find Pluto (Hint : follow Céline)
 
 To run the project, open the folder in VS Code and go live with Live Server extension. 
+
+To view the project, click [here](solar-system-psi-mauve.vercel.app)
